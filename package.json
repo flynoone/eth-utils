@@ -1,0 +1,18 @@
+{
+  "name": "web3utils",
+  "version": "1.0.0",
+  "description": "eth web3 utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "web3"
+  ],
+  "author": "tianxiaosi",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^10.7.1",
+    "web3": "^1.0.0-beta.35"
+  }
+}
