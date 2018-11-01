@@ -8,18 +8,21 @@
     "build": "tsc",
     "clean": "rm -rf dist && mkdir dist",
     "start": "npm run build && node dist/index.js",
-    "mnemonic": "node dist/mnemonic.js",
-    "privatekey": "npm run build && node dist/privatekey.js"
+    "mnemonic": "npm run build && node dist/mnemonic.js",
+    "privatekey": "npm run build && node dist/privatekey.js",
+    "ks": "npm run build && node dist/keystore.js",
+    "hdkey": "npm run build && node dist/hdkey.js"
   },
   "keywords": [
     "web3"
   ],
   "author": "tianxiaosi",
-  "license": "ISC",
   "dependencies": {
     "@types/node": "^10.7.1",
     "bip39": "^2.5.0",
+    "hdkey": "^1.1.0",
     "keccak": "^1.4.0",
+    "keythereum": "^1.0.4",
     "secp256k1": "^3.5.2",
     "web3": "^1.0.0-beta.35"
   }
