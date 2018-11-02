@@ -1,5 +1,4 @@
-import { toChecksumAddress } from "./tool";
-
+import { toChecksumAddress } from "./tool"
 const { randomBytes } = require("crypto")
 const secp256k1 = require("secp256k1")
 const keccak = require("keccak")
@@ -44,8 +43,9 @@ export function generatePrivateKey() {
     const address = keccak256(pubKey.slice(1)).slice(12);
     console.log('address: ', address.toString('hex'))
 
-    const checkSumAddress = toChecksumAddress(address)
-    console.log(checkSumAddress)
+    // to checksum address
+    const checkSumAddress = toChecksumAddress(address.toString('hex'))
+    console.log('checkSumAddress: ', checkSumAddress)
 }
 
 function keccak256(...data) {

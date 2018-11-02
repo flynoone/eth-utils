@@ -1,16 +1,26 @@
-# Address Keystore PrivateKey PublicKey Mnemonic  
+# Wallet Mnemonic PrivateKey Keystore PublicKey Address     
 
-了解 ddress Keystore PrivateKey PublicKey Mnemonic 之间的关系及转化
+了解 Wallet Mnemonic PrivateKey Keystore PublicKey Address 之间的关系及转化
+
+## Wallet  
+钱包用于管理私钥，地址，助记词，广播查询交易
+
+#### 非确定性钱包 (nondeterministic wallet)   
+每个密钥都是从随机数独立生成，密钥彼此之间无关联，这种钱包也被称为“Just a Bunch Of Keys（一堆密钥）”，简称JBOK钱包
+
+#### 确定性钱包 (hierarchical deterministic wallet) BIP-32 BIP-44  
+所有密钥都是从一个主密钥派生出来，这个密钥即为种子（Seed）。该类型钱包中所有密钥都相互关联，通过原始种子可以找到所有密钥。确定性钱包中使用了很多不同的密钥推导方法，最常用的是使用树状结构，称为分级确定性钱包或者HD (hierarchical deterministic)钱包
 
 ## PrivateKey  
 
 以太坊私钥只是一个随机数字。可以使用硬币：掷硬币256次。
 私钥用于生成公钥，生成数字签名
 
-#### 生成Privatekey
+#### 生成Privatekey  
  - 从随机数生成私钥 （crypto: randomBytes） **使用加密安全的伪随机数生成器(CSPRNG)** 
- - 私钥特点： 长度为64的16进制字符串或Buffer. **ex:0x134444...10**
- - 私钥大小： 大约 10^77，作为对比宇宙中可见原子数10^80
+ - 私钥特点： 长度为64的16进制字符串或Buffer. **ex:0x91598453f8e6bf900fea0f8e3664d077678c8db7586bfccf92f700f60537bfe0**
+ - 私钥大小： 大约 10^77，作为对比宇宙中可见原子数 10^80
+ - 私钥范围： [1, n-1] (n = 1.158*10^77, 略小于 2^256)
 
  **私钥很重要，妥善保管**
 
@@ -111,18 +121,20 @@ var options =  {
 ```
 
 ## Mnemonic & Seed  
-一串wordlist,方便HD钱包导出，导入. (ex.suggest road proof stone case fitness riot try lens save enrich often)  
+助记词是一串wordlist,方便HD钱包导出，导入. (ex. suggest road proof stone case fitness riot try lens save enrich often)  
 
 #### mnemonic wordlist 
 [wordlists](https://github.com/bitcoin/bips/tree/master/bip-0039)
 
-#### mnemonic 生成过程：
-  - 1）生成长度为128-256(bits)的随机序列(熵) 【128，160，192，224，256】
+#### mnemonic 生成过程
+  - 1）生成长度为128-256(bits)的随机序列(熵源)，熵长度为32的正整数倍
   - 2）取熵SHA256哈希后的前n位作为校验和(n= 熵长度/32)
   - 3）随机序列(熵) + 校验和拼合为一个字符串
   - 4）把步骤3得到的结果每11位切割，得到12个字符串
   - 5）步骤4得到的每个字符串匹配预先定义的2048 个词库里的单词
-  - ![mnemonic01](/imgs/mnemonic01.png)  
+  - 6）生成助记词序列
+  - ![](/imgs/bip3902.png)
+  - ![mnemonic01](/imgs/mnemonic01.png)
 
 #### mnemonic => seed  
 使用秘钥拉伸函数(PBKDF2)  
@@ -143,25 +155,44 @@ console.log('seed: ', seed.toString('hex'))
 ```
 **通过定义助记词让种子的备份更友好**  
 
-#### seed => privatekey   
+#### seed => privatekey  
+使用分层确定性推导方案`BIP-32` 生成 n 个私钥 
+
+![路径](imgs/bip3201.png)
+
+> 分层推导方案： [BIP-32]()
 > 路径分层推导方案： [BIP-44](https://github.com/satoshilabs/slips/blob/master/slip-0044.md)   
 > 预定义树状层级结构： m / purpose' / coin_type' / account' / change / address_index  
 > 例如: VET_PATH = `m/44'/818'/0'/0/0`  
 
 #### 路径结构分析
-1. m: 固定值  
+1. m: 固定值 （主私钥衍生的私钥以`m`开头）  
 2. purpose: 44  
 3. coin_type: 币种类型，0 比特币正式链，1 比特币测试链， 60 以太坊， 818 Vechain
 4. account : 代表这个币的账户索引，从0开始
 5. change: 常量0用于外部链，常量1用于内部链（也称为更改地址）。外部链用于在钱包外可见的地址（例如，用于接收付款）。内部链用于在钱包外部不可见的地址，用于返回交易变更。 (所以一般使用0)
-6. address_index: 地址索引，从0开始，代表生成第几个地址，官方建议，每个account下的address_index不要超过20
+6. address_index: 地址索引，从0开始，代表生成第几个地址，官方建议，每个account下的address_index不要超过 `20`
 
-## Wallet  
-钱包用于管理私钥，地址，keystore，助记词，广播查询交易
+#### 主私钥生成
+1. 根种子输入到`HMAC-SHA512`算法中就可以得到一个可用来创造主私钥(m) 和 一个主链编码（ a master chain code)这一步生成的秘钥（由私钥或公钥）及主链编码再加上一个索引号
+![masterseed](imgs/bip3202.png)
 
-1. 钱包分为非确定性钱包和确定性钱包 
+2. 主私钥继续衍生子私钥，子公钥，子链编码
+![subPriv](imgs/bip3203.png)
 
+#### 衍生推导方案  
+主私钥推导（强化衍生推导），主公钥推导（常规衍生推导）。
+使用**索引号（index）**区分这两个推导方案:  
+常规衍生：index [0, 2^31]
+强化衍生：index [2^31, 2^32 - 1]，为了方便用 i' 代表 2^31 + i
 
+## 总结
+ #### 非确定性钱包私钥流程
+ ![非确定性钱包](/imgs/nonhdwallet.png)
+
+ #### 确定性钱包私钥流程
+ ![确定性钱包](/imgs/hdwallet.png)
+    
 
 ## Tip
 1. [BIP-39](https://github.com/bitcoinjs/bip39#readme) : 助记词单词表
