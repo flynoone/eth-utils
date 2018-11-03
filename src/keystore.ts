@@ -31,7 +31,7 @@ function decrypt(ks, password) {
 }
 
 encrypt('91598453f8e6bf900fea0f8e3664d077678c8db7586bfccf92f700f60537bfe0', '123').then(r => {
-    console.log(r)
+    console.log(JSON.stringify(r))
 
     decrypt(r, '123').then((r: any) => {
         console.log('decrypt: ', r.toString('hex'))

@@ -1,7 +1,7 @@
 const HDKey = require('hdkey')
 
 const VET_DERIVATION_PATH = `m/44'/818'/0'/0/`;
-const ETH_DERIVATION_PATH = `m/44'/60'/0'/0/19/`;
+const ETH_DERIVATION_PATH = `m/44'/60'/0'/0/`;
 
 function derivePrivateKeyFromSeed(path, seed) {
     const hdKey = HDKey.fromMasterSeed(seed)
