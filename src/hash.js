@@ -16,10 +16,7 @@ function keccak256(...data) {
 }
 
 // eth hash(transaction hash)
-console.log('eth: ', createKeccakHash('keccak256').update(new Buffer('f86b018502540be40082c35094218b7a20085f274f1ad08088a7fbae63b143b288870462c56df9a8008029a07c06ba17c6cf2f3dd76f693a8609b6efca92863cb4b395733734997253580bdea063bfc79fcc3a5ac4d353fefa9e26853437ed64f865c4721f848b6f058663217c', 'hex')).digest('hex'))
-
-// 
-console.log('thor: ', createKeccakHash('keccak256').update(new Buffer('f86a018483215601825208946d90b87233b327363283e50d0e69cab50c58249d870f3f3da7ec7b208025a075261d6182328ee49001506ded0507a25ae7499f234596e2cf37fe67958506f4a065adc3c8cd2fe4e89c6e7d6eb49ee47487391fde744519a4623347f020063a5f', 'hex')).digest('hex'))
+console.log('eth: ', createKeccakHash('keccak256').update(new Buffer('f865098609184e72a00082520894d3ae78222beadb038203be21ed5ce7c9b1bff602108029a0798b4e082f76675469ec016a577c870af5c3c083b0df81efb887337eae47694ba037d6589a0369660510d8c54765e0e9ddece71f5f4f5c81b94f7ab54e3b7ace97', 'hex')).digest('hex'))
 
 function sha256(rawdata) {
     return crypto.createHash('sha256').update(rawdata).digest()
