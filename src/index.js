@@ -2,42 +2,38 @@ const Web3 = require('web3')
 
 let web3
 
-export async function init() {
+function init() { 
     if (typeof web3 !== 'undefined') {
         web3 = new Web3(web3.currentProvider)
     } else {
         // set the provider you want from Web3.providers
-        web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+        web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825'))
     }
 
-    web3.eth.getCoinbase((err, result) => {
-        if(err)
-            console.log(err)
-
-        console.log('coinbase=', result)
+    web3.eth.getBlock('latest').then(r => {
+        console.log('block: ', r)
     })
 
-    ethAccount()
-    ethWallet()
-}
+    web3.eth.getTransaction('0x6032047c1538fc0f47fb2acf1aec74492671b733c81221960e2cbf8f316d196c').then(r => {
+        console.log('tx', r)
+    })
 
-interface EthAccount{
-    address: string
-    privateKey: string
+    // ethAccount()
+    // ethWallet()
 }
 
 const ethAccount = () => {
     try {
-    const account: EthAccount = web3.eth.accounts.create('123')
+    const account = web3.eth.accounts.create('123')
     console.log(account)
 
-    const private_account: EthAccount =  web3.eth.accounts.privateKeyToAccount(account.privateKey)
+    const private_account =  web3.eth.accounts.privateKeyToAccount(account.privateKey)
     console.log(private_account)
 
     const keyStore = web3.eth.accounts.encrypt(account.privateKey, '123456')
     // console.log(`keystore: ${JSON.stringify(keyStore)}`)
 
-    const keyStore_account: EthAccount = web3.eth.accounts.decrypt(JSON.stringify(keyStore), '123456')
+    const keyStore_account = web3.eth.accounts.decrypt(JSON.stringify(keyStore), '123456')
     console.log(`keyStore_account: ${keyStore_account.address}`);
 
     } catch (error) {
