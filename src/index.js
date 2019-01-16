@@ -10,6 +10,10 @@ function init() {
         web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825'))
     }
 
+    web3.eth.accounts().then(r => {
+        console.log('r:', r)
+    })
+
     web3.eth.getBlock('latest').then(r => {
         console.log('block: ', r)
     })
