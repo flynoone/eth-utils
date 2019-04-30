@@ -14,6 +14,9 @@ function init() {
         console.log('accounts:', r)
     })
 
+    const private_account =  web3.eth.accounts.privateKeyToAccount('0xe9d51221d4f0d392d78ced9a9b8f2ee9169a6600e44248be8e04272efbdf1a07')
+    console.log(private_account)
+    
     // web3.eth.getBlock('latest').then(r => {
     //     console.log('block: ', r)
     // })
@@ -25,7 +28,7 @@ function init() {
     // ethAccount()
     // ethWallet()
 
-    personalAccount()
+    // personalAccount()
 }
 
 const personalAccount = () => {
