@@ -2,7 +2,7 @@ const Web3 = require('web3')
 
 let web3
 
-function init() { 
+async function init() { 
     if (typeof web3 !== 'undefined') {
         web3 = new Web3(web3.currentProvider)
     } else {
@@ -14,8 +14,10 @@ function init() {
         console.log('accounts:', r)
     })
 
-    const private_account =  web3.eth.accounts.privateKeyToAccount('0xe9d51221d4f0d392d78ced9a9b8f2ee9169a6600e44248be8e04272efbdf1a07')
+    const private_account =  web3.eth.accounts.privateKeyToAccount('0xadc67fa4735d355ccd2e567e80c525db380990f65953929d5e42b803e108b13d')
     console.log(private_account)
+    
+    // nonce
     
     // web3.eth.getBlock('latest').then(r => {
     //     console.log('block: ', r)
