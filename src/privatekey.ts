@@ -48,6 +48,20 @@ export function generatePrivateKey() {
     console.log('checkSumAddress: ', checkSumAddress)
 }
 
+export function privtoAddress(priv) {
+    const privKey = Buffer.from(priv, 'hex')
+    const isprivkey = secp256k1.privateKeyVerify(privKey)
+    console.log('verify private key: ', isprivkey)
+
+    // get public key
+    const pubKey = secp256k1.publicKeyCreate(privKey, false)
+    console.log('public key', pubKey.toString('hex'))
+
+    // generate address
+    const address = keccak256(pubKey.slice(1)).slice(12);
+    console.log('address: ', address.toString('hex'))
+}
+
 function keccak256(...data) {
     const h = keccak('keccak256');
     data.forEach(d => {
@@ -60,3 +74,5 @@ function keccak256(...data) {
     });
     return h.digest();
 }
+
+privtoAddress('7a479ae121bc25ad7298ed322dedfb7d792dea72c564a0eb1f15ecd5eb7835d1')

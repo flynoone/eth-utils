@@ -11,13 +11,10 @@ const crypto = require("crypto")
 
 // nurse equip pink inside glory travel sell soup often whip stock vital
 // const mnemonic = bip39.generateMnemonic()
-const mnemonic = bip39.generateMnemonic(128, crypto.randomBytes, bip39.wordlists.JA)
+const mnemonic = bip39.generateMnemonic(128, crypto.randomBytes, bip39.wordlists.EN)
 console.log('mnic: ', mnemonic)
 
 // pbkdf2(mnemonicBuffer, saltBuffer, 2048, 64, 'sha512')
-const seed = bip39.mnemonicToSeed(mnemonic, '123')
+const seed = bip39.mnemonicToSeed(mnemonic)
 console.log('seed: ', seed.toString('hex'))
 // 09733578dbc90d393c24955f3b9d44f4ae27ce3f63fbe022667c90dbd25099747d78f9c03e53b727c04062dde9cdc802aa226ef91111a7b94253a301b8ef2e83
-
-const mnemonic2 = bip39.mnemonicToSeedSync('basket actual').toString('hex')
-console.log('seed, ', mnemonic2)
