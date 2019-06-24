@@ -26,7 +26,7 @@ const to2 = '0x4342a2021009191456962088695b851a8B62659e'
 async function deploy(code, gasLimit, nonce) {
     const txParams = {
         nonce: nonce,
-        gasPrice: '0x9184e72a000000', 
+        gasPrice: '0x5d21dba000', 
         gasLimit: gasLimit,
         to: contract_address,
         value: '0x0', 
