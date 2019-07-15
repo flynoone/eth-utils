@@ -7,15 +7,16 @@ async function init() {
         web3 = new Web3(web3.currentProvider)
     } else {
         // set the provider you want from Web3.providers
-        web3 = new Web3(new Web3.providers.HttpProvider('https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825'))
+        // https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825
+        web3 = new Web3(new Web3.providers.HttpProvider())
     }
 
     web3.eth.getAccounts().then(r => {
         console.log('accounts:', r)
     })
 
-    const private_account =  web3.eth.accounts.privateKeyToAccount('0xadc67fa4735d355ccd2e567e80c525db380990f65953929d5e42b803e108b13d')
-    console.log(private_account)
+    // const private_account =  web3.eth.accounts.privateKeyToAccount('0xadc67fa4735d355ccd2e567e80c525db380990f65953929d5e42b803e108b13d')
+    // console.log(private_account)
     
     // nonce
     
@@ -31,6 +32,9 @@ async function init() {
     // ethWallet()
 
     // personalAccount()
+    
+    web3.eth.sign(1, "0xa99B2e0BC1Cd958591CeCa6AFCd85bAC73ED593E")
+    .then(console.log);
 }
 
 const personalAccount = () => {
