@@ -119,4 +119,8 @@ async function getTransactionCount(address) {
     return response.data.result
 }
 
+(async () => {
+    await getTransactionCount('0x5FC584A4607a6269A0676d9A3C30B9Fe7A52F64b')
+})()
+
 module.exports = {sendRawTransaction, getTransactionCount}
