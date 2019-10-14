@@ -1,6 +1,6 @@
-const EthereumTx = require('ethereumjs-tx')
+const EthereumTx = require('ethereumjs-tx').Trasaction
 const {sendRawTransaction, getTransactionCount} = require('./rpc')
-const privateKey = Buffer.from('adc67fa4735d355ccd2e567e80c525db380990f65953929d5e42b803e108b13d', 'hex')
+const privateKey = Buffer.from('e331b6d69882b4cb4ea581d88e0b604039a3de5967688d3dcffdd2270c0fd109', 'hex')
 const Web3 = require('web3')
 let web3
 if (typeof web3 !== 'undefined') {
@@ -50,7 +50,7 @@ web3SendSingleMethod(to1, 0.0123456)
 async function web3SendSingleMethod(to_address, amount) {
     const contract = new web3.eth.Contract(ABI, contract_address)
     console.log('options: ', contract.options.address) 
-    const value = (amount*10**18).toString('16')
+    const value = '0x' + (amount*10**18).toString('16')
     
     // encode
     const encode = contract.methods.sendSingle(to_address, value).encodeABI()
