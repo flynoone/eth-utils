@@ -1,6 +1,6 @@
 const axios = require('axios')
-// const rpc = 'https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825'
-const rpc = 'https://mainnet.infura.io/v3/add4bc608e6948bdb43de358f6890825'
+const rpc = 'https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825'
+// const rpc = 'https://mainnet.infura.io/v3/add4bc608e6948bdb43de358f6890825'
 
 async function getTransaction(txid) {
     response = await axios.post(rpc, {
@@ -27,10 +27,6 @@ async function getTransactionReceipt(txid) {
 
     console.log('tx re: ', response.data)
 }
-
-(async function() {
-    re = await getTransactionReceipt('0xce92d7d2533fbc736f54b569aa92d324a3c1e09bc71bda29e5dbd7761e297391')
-})()
 
 async function estimateGas(params) {
     response = await axios.post(rpc, {
