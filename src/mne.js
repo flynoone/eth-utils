@@ -19,7 +19,7 @@ const seed = bip39.mnemonicToSeed(mnemonic, '123')
 console.log('seed: ', seed.toString('hex'))
 // 09733578dbc90d393c24955f3b9d44f4ae27ce3f63fbe022667c90dbd25099747d78f9c03e53b727c04062dde9cdc802aa226ef91111a7b94253a301b8ef2e83
 
-const mnemonic2 = bip39.mnemonicToSeedHex('coyote gun urban faculty poet apart mobile pluck remember human metal welcome')
+const mnemonic2 = bip39.mnemonicToSeedHex('brush purse load select creek uncle puppy fly borrow mad fitness joy')
 console.log('seed, ', mnemonic2)
 
 // 7cd718e46af80d271d18188b992d7b9d56a56c92d65c45dcf0c5401466012a1d

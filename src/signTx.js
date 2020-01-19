@@ -23,7 +23,7 @@ const to_addr = '0x47665be92C18c2580fF7D65601Db909A35B4467A';
     const serializedTx = tx.serialize()
     const raw_data = '0x' + serializedTx.toString('hex')
     console.log('raw: ', raw_data)
-
+    
     // broadcast tx 
     await sendRawTransaction(raw = raw_data)
   })()
