@@ -26,6 +26,6 @@ const tx = new EthereumTx(txParams)
 tx.sign(privateKey)
 const serializedTx = tx.serialize()
 
+const raw_tx = new EthereumTx(serializedTx.toString('hex'))
+console.log(raw_tx.)
 console.log('raw: ', serializedTx.toString('hex'))
-
-
