@@ -1,6 +1,6 @@
 const axios = require('axios')
-// const rpc = 'https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825'
-const rpc = 'https://mainnet.infura.io/v3/add4bc608e6948bdb43de358f6890825';
+const rpc = 'https://ropsten.infura.io/v3/add4bc608e6948bdb43de358f6890825';
+// const rpc = 'https://mainnet.infura.io/v3/add4bc608e6948bdb43de358f6890825';
 
 (async () => {
     await getTransactionCount('0x21e5487EF5245d3f50b4eB3301129c68A26daD8E')

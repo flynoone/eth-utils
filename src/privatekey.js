@@ -1,4 +1,4 @@
-import { toChecksumAddress } from "./tool"
+const { toChecksumAddress } = require("./tool")
 const { randomBytes } = require("crypto")
 const secp256k1 = require("secp256k1")
 const keccak = require("keccak")
@@ -8,14 +8,14 @@ const keccak = require("keccak")
 
 // 30a506566270e107da08c7ccbf621024b9917215c9ca3ce6f4c6510dc8043b89
 // 9a9821c49d2299e9C6597336BAba3cf7B561af9d
-checksumAddress('9a9821c49d2299e9c6597336baba3cf7b561af9d')
+// checksumAddress('9a9821c49d2299e9c6597336baba3cf7b561af9d')
 
-function checksumAddress(address: string) {
-    const checkSumAddr = toChecksumAddress(address)
-    console.log(checkSumAddr)
-}
+// function checksumAddress(address) {
+//     const checkSumAddr = toChecksumAddress(address)
+//     console.log(checkSumAddr)
+// }
 
-export function generatePrivateKey() {
+function generatePrivateKey() {
     const msg = randomBytes(32)
     console.log('msg: ', msg.toString('hex'))
 
@@ -48,7 +48,7 @@ export function generatePrivateKey() {
     console.log('checkSumAddress: ', checkSumAddress)
 }
 
-export function privtoAddress(priv) {
+function privtoAddress(priv) {
     const privKey = Buffer.from(priv, 'hex')
     const isprivkey = secp256k1.privateKeyVerify(privKey)
     console.log('verify private key: ', isprivkey)
@@ -75,4 +75,4 @@ function keccak256(...data) {
     return h.digest();
 }
 
-privtoAddress('7a479ae121bc25ad7298ed322dedfb7d792dea72c564a0eb1f15ecd5eb7835d1')
+privtoAddress('80ef8315c27ea728cb519f6c509ea6552a36b253a416a41f8d9eed83aec34c3b')

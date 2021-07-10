@@ -1,6 +1,6 @@
 const createKeccakHash = require('keccak')
 
-export function toChecksumAddress(address: string) {
+function toChecksumAddress(address) {
     address = address.toLowerCase().replace('0x', '')
     let hash = createKeccakHash('keccak256').update(address).digest('hex')
     let ret = '0x'
