@@ -1,9 +1,17 @@
+/*
+ * @Author: your name
+ * @Date: 2021-05-17 10:48:29
+ * @LastEditTime: 2021-07-16 09:56:21
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /eth-web3-utils/src/decode_tx.js
+ */
 const txDecoder = require('ethereum-tx-decoder');
 
 /**
  * Decode ethereum signed raw data
  */
-const d_tx = txDecoder.decodeTx('0x02f86b03320181ff8307a120946ea462e163adb78cafa6b57c5680ab8689a3f19387134a8e6521600080c080a0326c8bc1f0c00716a570a31666ea05c72fbc329abc84bde5a13412fa62c24531a023965362da7cb97fb759bd0060c1b721d2cb47098ed8e11faf15a0209f6fb5cb')
+const d_tx = txDecoder.decodeTx('0xf8ae83050b9c8502540be4008307a120941162e2efce13f99ed259ffc24d99108aaa0ce93580b844a9059cbb00000000000000000000000092e321367bdf57903ce92e286f621857a5839c44000000000000000000000000000000000000000000000000069789fbbc4f80008194a0cde6ed9223b44b0f811ae39f0fdd387e9aa596d73fa9028b72f22cacde1938f5a01a6ed590d39b4fff55d9a684ab5ea6ee8598aaa06eb4e3fc6b47e5d9898f1b58')
 
 console.log(d_tx)
 

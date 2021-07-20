@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-07-08 15:59:31
+ * @LastEditTime: 2021-07-12 10:16:44
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /eth-web3-utils/src/londonTx.ts
+ */
 import Common from '@ethereumjs/common'
 import { FeeMarketEIP1559Transaction } from '@ethereumjs/tx'
 const { getTransactionCount, sendRawTransaction } = require('./rpc');
@@ -13,7 +21,7 @@ const address = '0xf8dc84221c12d73918f4610064a7e0f00c869613';
   const txData = {
     // "data": "0x",
     "gasLimit": "0x7a120",
-    "maxPriorityFeePerGas": "0x3b9aca00", // 1 Gwei
+    "maxPriorityFeePerGas": "0x1", // 1 Gwei
     "maxFeePerGas": "0x3b9ad0cc",
     "nonce": nonce,
     "to": "0x6ea462e163adb78cafa6b57c5680ab8689a3f193",
@@ -42,10 +50,13 @@ const address = '0xf8dc84221c12d73918f4610064a7e0f00c869613';
 
 /**
  * EIP1559 https://eips.ethereum.org/EIPS/eip-1559
+ * https://cj.sina.com.cn/articles/view/6311913111/178382697020016oxs?sudaref=www.google.com&display=0&retcode=0
+ * 
  * Gas Fee设置
    maxFeePerGas = 2 * getBlock(-1).baseFee + maxPriorityFeePerGas
    maxPriorityFeePerGas = 1 gwei
  * 测试交易数据： 0x5adc7a8ef767f307cb95a70e4793487b93b139c566ea88c9e0034eeabaf41bdf 
+   0x79047c596aeb644ef584a9d02511a82a3e2c58dbb3d7b6de9bb953fbadb9bd02 (maxPriorityFeePerGas == 1wei)
  * 一笔交易的最终手续费：fee = (maxPriorityFeePerGas + Block BaseFee Per Gas) * gas_used
  * tx_fee_saving = (maxFeePerGas - (maxPriorityFeePerGas + Block BaseFee Per Gas)) * gas_used
  */

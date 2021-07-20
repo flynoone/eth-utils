@@ -1,9 +1,7 @@
 # ETH WEB3 UTILS
 
 ## Usage
-```
-1. start local eth dev node $ geth --dev --datadir ethdev  --rpcapi personal,web3,eth --rpc --rpccorsdomain "*"  console 2>>test.log
-2.
+```md
 ```
 
 ## Problem
