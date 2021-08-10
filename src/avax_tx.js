@@ -1,23 +1,23 @@
 const EthereumTx = require('ethereumjs-tx');
-const { getTransactionCount, sendRawTransaction } = require('./rpc');
+const { getTransactionCount} = require('./rpc');
 
-const account = '0xf8dc84221c12d73918f4610064A7E0f00C869613'
-const privateKey = Buffer.from('adc67fa4735d355ccd2e567e80c525db380990f65953929d5e42b803e108b13d', 'hex')
-const to_addr = '0x47665be92C18c2580fF7D65601Db909A35B4467A';
+const account = '0xd66edf876e55117893d2585b703d8f703d403b9b'
+const privateKey = Buffer.from('0e03772a48e024b6e9cd82c9df69593409099b514ae9c475e034a47524f51929', 'hex')
+const to_addr = '0xf8dc84221c12d73918f4610064A7E0f00C869613';
 
 (async () => {
   const nonce = await getTransactionCount(account)
   const txParams = {
     // type: 0,
-    from: "0xf8dc84221c12d73918f4610064A7E0f00C869613",
-    nonce: 0,
-    gasPrice: 0,
+    from: account,
+    nonce: 3,
+    gasPrice: "0x34630b8a00",
     gasLimit: "0x5208",
-    to: to_addr,
-    value: '0x00',
-    data: '0x',
+    to: "0x49606020D8F19875274346c89e24ccA96a5BfeEF",
+    value: "0x2bdbb64bc09000",
+    data: "0x",
     // EIP 155 chainId - mainnet: 1, ropsten: 3
-    chainId: 1
+    chainId: 43114
   }
 
   const tx = new EthereumTx(txParams)
