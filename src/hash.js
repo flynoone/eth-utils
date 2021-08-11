@@ -41,6 +41,7 @@ console.log('nativeAssetBalance: ', keccakHash('nativeAssetBalance(address,uint2
 
 console.log('name: ', createKeccakHash('keccak256').update(Buffer.from('736e6f7773746f726d', 'hex')).digest('hex'))
 
+console.log('txhash: ', createKeccakHash('keccak256').update(Buffer.from('f86f078534630b8a0082f5889449606020d8f19875274346c89e24cca96a5bfeef88071c37101f72904080830150f8a023dc146c6f67cad57ff89388fd9713dc4b67eabe86420fb98a07bedcc51ba9d3a007336f1b898eefedf7fed6794a17f99416c74e411716f5d5e25a7d81758fcda3', 'hex')).digest('hex'))
 
 // hash hex string
 function keccakHash(raw) {
