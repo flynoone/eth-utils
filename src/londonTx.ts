@@ -11,25 +11,21 @@ import { FeeMarketEIP1559Transaction } from '@ethereumjs/tx'
 const { getTransactionCount, sendRawTransaction } = require('./rpc');
 
 // mainnet: 1, ropsten: 3
-const common = new Common({ chain: 'ropsten', hardfork: 'london' });
+const common = new Common({ chain: 0xfa2, hardfork: 'london' });
 
-const privateKey = Buffer.from('adc67fa4735d355ccd2e567e80c525db380990f65953929d5e42b803e108b13d','hex')
-const address = '0xf8dc84221c12d73918f4610064a7e0f00c869613';
+const privateKey = Buffer.from('a1c552c5707bb7f4aebb2f4d78ac1dfb70a662ff2914f5b0bd1f7720f29fd67d','hex')
+const address = '0x79288ac3525c4e7669481571658a867f7e18f0b2';
 
 (async () => {
   const nonce = await getTransactionCount(address)
   const txData = {
-    // "data": "0x",
     "gasLimit": "0x7a120",
     "maxPriorityFeePerGas": "0x1", // 1 Gwei
     "maxFeePerGas": "0x3b9ad0cc",
     "nonce": nonce,
     "to": "0x6ea462e163adb78cafa6b57c5680ab8689a3f193",
     "value": "0x134a8e65216000",
-    // "v": "0x01",
-    // "r": "0xafb6e247b1c490e284053c87ab5f6b59e219d51f743f7a4d83e400782bc7e4b9",
-    // "s": "0x479a268e0e0acd4de3f1e28e4fac2a6b32a4195e8dfa9d19147abe8807aa6f64",
-    "chainId": "0x03",
+    "chainId": "0xfa2",
     "accessList": [],
     "type": "0x02"
   }
@@ -37,6 +33,7 @@ const address = '0xf8dc84221c12d73918f4610064a7e0f00c869613';
   const tx = FeeMarketEIP1559Transaction.fromTxData(txData, { common })
   
   const signedTx = tx.sign(privateKey)
+  console.log('tx: ', JSON.stringify(signedTx))
   
   const serializedTx = signedTx.serialize()
   // console.log(serializedTx.toString('hex'))

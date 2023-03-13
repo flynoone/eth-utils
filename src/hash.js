@@ -31,10 +31,17 @@ console.log('permit: ', createKeccakHash('keccak256').update(Buffer.from('Permit
 
 console.log('balanceOf: ', createKeccakHash('keccak256').update(Buffer.from('balanceOf(address)')).digest('hex'))
 
-console.log('name: ', createKeccakHash('keccak256').update(Buffer.from('name()')).digest('hex'))
+console.log('name: ', createKeccakHash('keccak256').update(Buffer.from('name()')).digest('hex').substr(0,8))
+console.log('symbol: ', createKeccakHash('keccak256').update(Buffer.from('symbol()')).digest('hex').substr(0,8))
 
 // event Transfer(address indexed _from, address indexed _to, uint256 _value)
-console.log('Event Transfer: ', keccakHash('Transfer(address,address,uint256)').substr(0,8))
+console.log('Event Transfer: ', keccakHash('Transfer(address,address,uint256)'))
+
+console.log('supportsInterface: ', keccakHash('supportsInterface(bytes4)').substr(0,8))
+
+console.log('OwnershipTransferred: ', keccakHash('OwnershipTransferred(address,address)'))
+
+console.log('_setImplementation: ', keccakHash('_setImplementation(address)'))
 
 // nativeAssetBalance(address addr, uint256 assetID)
 console.log('nativeAssetBalance: ', keccakHash('nativeAssetBalance(address,uint256)').substr(0,8))
@@ -42,6 +49,7 @@ console.log('nativeAssetBalance: ', keccakHash('nativeAssetBalance(address,uint2
 console.log('name: ', createKeccakHash('keccak256').update(Buffer.from('736e6f7773746f726d', 'hex')).digest('hex'))
 
 console.log('txhash: ', createKeccakHash('keccak256').update(Buffer.from('f86f078534630b8a0082f5889449606020d8f19875274346c89e24cca96a5bfeef88071c37101f72904080830150f8a023dc146c6f67cad57ff89388fd9713dc4b67eabe86420fb98a07bedcc51ba9d3a007336f1b898eefedf7fed6794a17f99416c74e411716f5d5e25a7d81758fcda3', 'hex')).digest('hex'))
+
 
 // hash hex string
 function keccakHash(raw) {

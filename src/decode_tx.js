@@ -7,13 +7,21 @@
  * @FilePath: /eth-web3-utils/src/decode_tx.js
  */
 const txDecoder = require('ethereum-tx-decoder');
+(() => {
+  const raws = [
+    "0xf86c80850392f1458182c35094bc1d00f2659cf0eb84f0e6eb4c25c04512ecb84787271471148780008081eca043a51202f8653019d5eed8b7eab80452047d738a953ca6a88d60a7339b221e11a00a84752ebd6262f6b61d6e77958d1ea56fb9ffcecbc62d31ae52b4e226c3b633"
+  ]
+  raws.forEach(raw => {
+    const d_tx = txDecoder.decodeTx(raw)  
 
+    console.log(d_tx['nonce'])
+  });
+
+})()
 /**
  * Decode ethereum signed raw data
  */
-const d_tx = txDecoder.decodeTx('0xf8ab808534630b8a00830249f0944f3e28f36708866d047dd63fa0c995d93e3c8e1d80b844a9059cbb000000000000000000000000ae910435273512e07b9e7cd6d8b03278bdefee6a0000000000000000000000000000000000000000000000000057b76c978120008188a0957cdb1244d04d1b70f4045ef7075f2a913ebff0d7624c0c6af3e65b9b0051e4a05446ec41b225d3aba8ea10cd22737bebbc31e7248ccb28f325c24376762d881b')
 
-console.log(d_tx)
 
 /**
 { nonce: 261243,
